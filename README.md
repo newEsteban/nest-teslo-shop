@@ -19,5 +19,10 @@
 docker-compose up -d
 ```
 
-6. Levantar modo desarrollo 
+6. Ejecutar Seed de product e imagenes
+```
+localhost:3000/api/seed
+```
+
+7. Levantar modo desarrollo 
 ```npm run start:dev```
