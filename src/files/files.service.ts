@@ -5,7 +5,6 @@ import { existsSync } from 'fs';
 @Injectable()
 export class FilesService {
     getStaticProductImage(imageName: string) {
-
         const path = join(__dirname, '../../storage/products', imageName);
 
         if (!existsSync(path)) {

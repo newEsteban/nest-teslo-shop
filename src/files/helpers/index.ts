@@ -1,4 +1,4 @@
-import { fileNamer } from "./fileNamer.helper";
-import { fileFilter } from "./fileFilter.helper";
+import { fileNamer } from './fileNamer.helper';
+import { fileFilter } from './fileFilter.helper';
 
-export {fileNamer, fileFilter};
+export { fileNamer, fileFilter };
