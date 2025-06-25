@@ -25,15 +25,12 @@ import { JwtStrategy } from './strategies/jwt.strategy';
                 // console.log('JWT_SECRET:', process.env.JWT_SECRET);
                 return {
                     secret: configService.get('JWT_SECRET'),
-                    singOptions: { expiresIn: process.env.JWT_EXPIRES_IN }, // Adjust the expiration time as needed
+                    signOptions: { expiresIn: process.env.JWT_EXPIRES_IN }, // Adjust the expiration time as needed
                 }
             }
         }),
         ConfigModule,
-        // JwtModule.register({
-        //     secret: process.env.JWT_SECRET,
-        //     signOptions: { expiresIn: process.env.JWT_EXPIRES_IN }, // Adjust the expiration time as needed
-        // })
     ], // Add your entities here
 })
 export class AuthModule {}
+
