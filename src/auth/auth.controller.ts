@@ -3,22 +3,18 @@ import {
     Get,
     Post,
     Body,
-    Patch,
-    Param,
-    Delete,
     UseGuards,
     Req,
-    SetMetadata,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDTO, LoginUserDTO } from './dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from './entities/User.entity';
-import { GetUser } from './decorators/get-user.decorator';
 import { RawHeaders } from 'src/common/decorators/raw-headers.decorator';
 import { UserRoleGuard } from './guards/user-role.guard';
-import { RoleProtected } from './decorators/role-protected.decorator';
 import { ValidRole } from './interfaces/valid-roles';
+
+import { Auth, GetUser, RoleProtected } from './decorators';
 
 @Controller('auth')
 export class AuthController {
@@ -54,6 +50,25 @@ export class AuthController {
     @RoleProtected(ValidRole.admin, ValidRole.superUser)
     @UseGuards(AuthGuard(), UserRoleGuard)
     testingPrivateRoute2(
+        @GetUser() user: User
+    ) {
+        return {
+            ok: true,
+            message: 'Hola mundo privado 2',
+            user,
+        };
+    }
+
+    @Get('private3')
+    //Este decorador permite que solo los usuarios con roles específicos puedan acceder a esta ruta.
+    @Auth( ValidRole.admin, ValidRole.superUser) 
+    /**
+     * Handles a private route for testing purposes.
+     *
+     * @param user - The currently authenticated user, injected by the `@GetUser()` decorator.
+     * @returns An object indicating the operation was successful, a message, and the authenticated user.
+     */
+    testingPrivateRoute3(
         @GetUser() user: User
     ) {
         return {

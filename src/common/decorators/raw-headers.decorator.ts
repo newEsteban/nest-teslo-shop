@@ -1,12 +1,28 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { createParamDecorator, ExecutionContext, SetMetadata } from '@nestjs/common';
 
 /**
- * Decorador personalizado para obtener los headers "raw" de la petición HTTP.
- * Uso: en un controlador, agrega @RawHeaders() como parámetro para acceder a los headers.
+ * Custom parameter decorator for NestJS controllers that injects the raw HTTP headers
+ * from the incoming request into the decorated route handler parameter.
+ *
+ * @param data - Optional data passed to the decorator (not used in this implementation).
+ * @param ctx - The execution context of the current request.
+ * @returns An array containing the raw HTTP headers as received by the server.
+ *
+ * @example
+ * ```typescript
+ * @Get()
+ * someHandler(@RawHeaders() rawHeaders: string[]) {
+ *   console.log(rawHeaders);
+ * }
+ * ```
+ *
+ * This decorator is useful when you need access to the original, unparsed HTTP headers
+ * for advanced use cases such as debugging, logging, or custom header processing.
  */
 export const RawHeaders = createParamDecorator(
-  (data: unknown, ctx: ExecutionContext) => {
-    const request = ctx.switchToHttp().getRequest();
-    return request.rawHeaders;
-  },
+    ( data: string, ctx: ExecutionContext ) => {
+
+        const req = ctx.switchToHttp().getRequest();
+        return req.rawHeaders;
+    }
 );
