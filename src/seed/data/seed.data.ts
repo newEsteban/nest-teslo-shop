@@ -15,10 +15,92 @@ type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
 
 interface SeedData {
+    users: SeedUser[];
     products: SeedProduct[];
 }
 
+interface SeedUser {
+    email: string;
+    password: string;
+    fullName: string;
+    roles: string[];
+    isActive?: boolean;
+}
+
 export const initialData: SeedData = {
+    users: [
+        {
+            email: 'ecardona@virtualit.cl',
+            password: 'Secret94!',
+            fullName: 'Esteban Cardona',
+            roles: ['admin', 'super', 'user'],
+            isActive: true,
+        },
+        {
+            email: 'admin2@teslo.com',
+            password: 'Admin123!',
+            fullName: 'Admin Two',
+            roles: ['admin'],
+            isActive: true,
+        },
+        {
+            email: 'user1@teslo.com',
+            password: 'User123!',
+            fullName: 'User One',
+            roles: ['user'],
+            isActive: true,
+        },
+        {
+            email: 'user2@teslo.com',
+            password: 'User123!',
+            fullName: 'User Two',
+            roles: ['user'],
+            isActive: true,
+        },
+        {
+            email: 'user3@teslo.com',
+            password: 'User123!',
+            fullName: 'User Three',
+            roles: ['user'],
+            isActive: true,
+        },
+        {
+            email: 'user4@teslo.com',
+            password: 'User123!',
+            fullName: 'User Four',
+            roles: ['user'],
+            isActive: false,
+        },
+        {
+            email: 'user5@teslo.com',
+            password: 'User123!',
+            fullName: 'User Five',
+            roles: ['user'],
+            isActive: true,
+        },
+        {
+            email: 'user6@teslo.com',
+            password: 'User123!',
+            fullName: 'User Six',
+            roles: ['user'],
+            isActive: false,
+        },
+        {
+            email: 'manager1@teslo.com',
+            password: 'Manager123!',
+            fullName: 'Manager One',
+            roles: ['user', 'admin'],
+            isActive: true,
+        },
+        {
+            email: 'manager2@teslo.com',
+            password: 'Manager123!',
+            fullName: 'Manager Two',
+            roles: ['user', 'admin'],
+            isActive: true,
+        },
+    ],
+
     products: [
         {
             description:

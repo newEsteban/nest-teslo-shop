@@ -6,6 +6,7 @@ import {
     UseGuards,
     Req,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CreateUserDTO, LoginUserDTO } from './dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -16,6 +17,7 @@ import { ValidRole } from './interfaces/valid-roles';
 
 import { Auth, GetUser, RoleProtected } from './decorators';
 
+@ApiTags('Auth-TesloShop')
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
@@ -76,6 +78,14 @@ export class AuthController {
             message: 'Hola mundo privado 2',
             user,
         };
+    }
+
+    @Get('check-status')
+    @Auth()
+    checkAuthStatus(
+        @GetUser() user: User
+    ) {
+        return this.authService.checkAuthStatus(user);
     }
 
 }

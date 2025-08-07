@@ -1,5 +1,6 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Product } from '../../products/entities/product.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -36,6 +37,12 @@ export class User {
     })
     isActive: boolean;
 
+    @OneToMany(
+        () => Product,
+        (product) => product.user
+    )
+    products: Product[];
+
     @BeforeInsert()
     async hashPassword() {
         if (!this.password) return;
@@ -52,4 +59,6 @@ export class User {
     checkFieldsBeforeUpdate() {
         this.checkFieldsBeforeInsert();
     }
+
+
 }

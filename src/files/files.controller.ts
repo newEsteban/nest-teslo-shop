@@ -23,8 +23,10 @@ import { fileFilter, fileNamer } from './helpers';
 
 // Importa configuración de almacenamiento desde multer (para guardar el archivo en disco)
 import { diskStorage } from 'multer';
+import { ApiTags } from '@nestjs/swagger';
 
 // Define un controlador para manejar rutas relacionadas con archivos
+@ApiTags('Files-TesloShop')
 @Controller('files')
 export class FilesController {
     // Inyección del servicio FilesService a través del constructor

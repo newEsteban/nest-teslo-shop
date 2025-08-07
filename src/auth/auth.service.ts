@@ -78,6 +78,13 @@ export class AuthService {
         return token;
     }
 
+    async checkAuthStatus(user: User) {
+        return {
+            ...user,
+            token: this.getJwtToken({ id: user.id }),
+        }
+    }
+
     /**
      * Crea un nuevo usuario en la base de datos.
      * 1. Genera una instancia de usuario a partir del DTO recibido.
